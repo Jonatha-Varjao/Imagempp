@@ -1,0 +1,7 @@
+# compyled bytecode
+__pycache__/
+# nodejs modules
+node_modules/
+# .vscode config files
+.vscode/
+*.json.swp
