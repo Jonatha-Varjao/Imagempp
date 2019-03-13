@@ -1,0 +1,26 @@
+{
+  "name": "Imagepp",
+  "productName": "Image++",
+  "version": "1.0.0",
+  "description": "Software para data augmentation de imagens",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Data Augmentation",
+    "Image"
+  ],
+  "author": "Jonatha Oliveira Reis Varjão",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.0.7",
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.3.1",
+    "popper.js": "^1.14.7"
+  },
+  "dependencies": {
+    "python-shell": "^1.0.7"
+  }
+}

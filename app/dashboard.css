@@ -1,0 +1,50 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+  
+  /*
+   * Typography
+   */
+  
+  h1 {
+    margin-bottom: 20px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #eee;
+  }
+ 
+  
+  /*
+   * Sidebar
+   */
+  
+  
+   /*
+   * Dashboard
+   */
+  
+   /* Placeholders */
+ 
+  /*
+   Sticky footer
+  */
+  html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+    /* Set the fixed height of the footer here */
+    
+    line-height: 30px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+  }
+  
