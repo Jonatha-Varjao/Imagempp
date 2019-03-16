@@ -21,6 +21,8 @@
     "popper.js": "^1.14.7"
   },
   "dependencies": {
-    "python-shell": "^1.0.7"
+    "font-awesome": "^4.7.0",
+    "python-shell": "^1.0.7",
+    "request-promise": "^4.2.4"
   }
 }
