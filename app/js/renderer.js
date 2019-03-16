@@ -11,15 +11,12 @@ function grab_run_info(event) {
 }
 
 function start_run(event) {
-    /* - chamar o python-shell e rodar as configurações -  */
     event.preventDefault();
-    var form = document.getElementById( "test" );
-    var output = document.getElementById( "output" );
+    var form = document.getElementById( "form_configuracoes" );
+    var output = document.getElementById( "output_configuracoes" );
     json = toJSONString( form );
     output.innerHTML = json;
     ipcRenderer.send('teste-disney', json);
-    
-    
 }
 
 function toJSONString( form ) {
@@ -41,3 +38,47 @@ function toJSONString( form ) {
 
     return JSON.stringify( obj );
 }
+
+/* AJAX TO BUTTON - API TEST */
+$(function(){
+	$('#register').click(function(){
+		$.ajax({
+			url: 'http://localhost:5000/signUpUser',
+			data: $('form').serialize(),
+			type: 'POST',
+			success: function(response){
+				console.log(response);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+	});
+});
+
+/* CARREGAR O JSON */
+
+/* SALVAR O JSON */
+$(function(){
+	$('#json_save').click(function(){
+		$.ajax({
+			url: 'http://localhost:5000/save_config',
+			data: $('#form_configuracoes').serialize(),
+			type: 'POST',
+			success: function(response){
+                console.log(response);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+	});
+});
+
+
+/* MODAL CONFIG-OPEN */
+$(document).ready(function () {
+    $("#myBtn").click(function () {
+      $("#myModal").modal();
+    });
+});
