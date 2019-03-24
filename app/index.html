@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="utf-8">
@@ -13,8 +13,6 @@
 </head>
 
 <body>
-
-
   <div class="container-fluid">
     <div class="row-lg">
       <main role="main" class="col pt-3">
@@ -24,69 +22,265 @@
             Imagem++
           </a>
           <div class="row">
-            <button class="btn btn-warning btn-lg" id="myBtn" style="margin-right:5px; margin-top: 5px;" ><i class="fa fa-cogs" aria-hidden="true"></i>Configurações</button>
-            <button class="btn btn-info btn-lg" id="myBtn" style="margin-top: 5px;" ><i class="fa fa-play"
-                style="padding-left: 10px; color:black;" aria-hidden="true"></i>Run</button>
+            <button class="btn btn-warning btn-lg" id="myBtn" style="margin-right:5px; margin-top: 5px;"><i
+                class="fa fa-cogs" aria-hidden="true"></i> Configurações</button>
+            <button class="btn btn-info btn-lg" style="margin-top: 5px;"><i class="fa fa-play"
+                style="padding-left: 10px; color:black;" aria-hidden="true"></i> Run</button>
           </div>
         </nav>
         <hr>
         <div class="container-fluid">
-          <section class="row text-center">
+          <div class="row text-center">
             <div class="container">
-
               <form class="form-signin" action="/signUp" method="post" role="form">
                 <h2 class="form-signin-heading">Please Sign Up </h2>
                 <input type="email" name="username" class="form-control" placeholder="Email address" required autofocus>
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" class="form-control " placeholder="Password" required>
 
                 <button id="register" class="btn btn-lg btn-primary btn-block" type="button">Register </button>
               </form>
 
             </div>
             <p id="response"></p>
-          </section>
-        </div>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <form id="form_configuracoes" onSubmit="JavaScript:start_run(event)">
-                <div class="modal-header">
-                  <h4 class="modal-title text-center">Configurações do aumento</h4>
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group col-md-12">
-                    <div class="col-md-12 row">
-                      <input type="checkbox" class="form-check-input" name="rotation" id="rotation" />
-                      <label class="form-check-label" for="rotation">Rotação</label>
-                    </div>
-                    <div class="col-md-12 row">
-                      <input type="checkbox" class="form-check-input" name="translation" id="translation" />
-                      <label class="form-check-label" for="translation">Translação</label>
-                    </div>
-                  </div>
-                  <p>
-                    <input id="json_save" type="submit" class="btn btn-primary btn-block" />
-                  </p>
-                </div>
-              </form>
-              <div class="modal-footer">
-                <pre id="output_configuracoes"></pre>
-              </div>
-            </div>
-
           </div>
         </div>
 
-      </main>
 
+        <!-- Modal com formuládio das confiurações -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Configurações do aumento</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form id="form_configuracoes" onSubmit="JavaScript:start_run(event)">
+                  <div class="form-group col-lg container-fluid">
+                    <!-- FORM ROTAÇÃO -->
+
+                    <div class="form-row" style="padding-bottom: 5px;">
+                      <div class="col">
+                        <input type="checkbox" class="form-check-input" name="rotation" id="rotation" />
+                        <label class="form-check-label" for="rotation">Rotação</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" id="probability" name="probability" class="form-control rotation1"
+                          placeholder="Probabilidade" data-toggle="tooltip" data-placement="top"
+                          title="Probabilidade de acontecer esta operação na imagem" disabled>
+                      </div>
+                      <div class="col">
+                        <input type="text" id="max_left_rotation" name="max_left_rotation"
+                          class="form-control rotation2" placeholder="Rotações à esquerda" data-toggle="tooltip"
+                          data-placement="top" title="Graus de rotação a esquerda" disabled>
+                      </div>
+                      <div class="col">
+                        <input type="text" id="max_right_rotation" name="max_right_rotation"
+                          class="form-control rotation3" placeholder="Rotações à direita" data-toggle="tooltip"
+                          data-placement="top" title="Graus de rotação a direita" disabled>
+                      </div>
+                    </div>
+
+
+                    <!-- FORM ZOOM (PROBABILIDADE, MIN_FACTOR: mínimo valor de zoom aplicado, MAX_FACTOR: máximo valor de zoom aplicado )-->
+                    <div class="form-row" style="padding-bottom: 5px;">
+                      <div class="col">
+                        <input type="checkbox" class="form-check-input" name="zoom" id="zoom" />
+                        <label class="form-check-label" for="shear">Zoom</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" id="probability" name="probability" class="form-control zoom1 "
+                          placeholder="Probabilidade" data-toggle="tooltip" data-placement="top"
+                          title="Probabilidade de acontecer esta operação na imagem" disabled>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control zoom2" placeholder="Fator mínimo" data-toggle="tooltip"
+                          data-placement="top" title="Valor mínimo da aplicação do zoom" disabled>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control zoom3" placeholder="Fator máximo" data-toggle="tooltip"
+                          data-placement="top" title="Valor máximo da aplicação do zoom" disabled>
+                      </div>
+                    </div>
+
+
+                    <!-- FORM CISALHAMENTO (PROBABILIDADE, MAX_SHEAR_LEFT, MAX_SHEAR_RIGHT) -->
+                    <div class="form-row" style="padding-bottom: 5px;">
+                      <div class="col">
+                        <input type="checkbox" class="form-check-input" name="shear" id="shear" />
+                        <label class="form-check-label" for="shear">Cisalhamento</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" id="probability" name="probability" class="form-control shear1"
+                          placeholder="Probabilidade" data-toggle="tooltip" data-placement="top"
+                          title="Probabilidade de acontecer esta operação na imagem." disabled>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control shear2" placeholder="Cisalhamento à esquerda"
+                          data-toggle="tooltip" data-placement="top" title="Valor máximo do cisalhamento à esquerda"
+                          disabled>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control shear3" placeholder="Cisalhamento à direita"
+                          data-toggle="tooltip" data-placement="top" title="Valor máximo do cisalhamento à direita"
+                          disabled>
+                      </div>
+                    </div>
+
+
+                    <!-- ESCALA DE CINZA (PROBABILIDADE) -->
+                    <div class="form-row" style="padding-bottom: 5px;">
+                      <div class="col">
+                        <input type="checkbox" class="form-check-input" name="greyscale" id="greyscale" />
+                        <label class="form-check-label" for="sample">Escala de cinza</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control greyscale1" placeholder="Probabilidade"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Probabilidade de acontecer esta operação na imagem" disabled>
+                      </div>
+                      <div class="col">
+                      </div>
+                      <div class="col">
+                      </div>
+                    </div>
+
+
+
+                    <!-- INTERPOLAÇÃO (PROBABILIDADE, FATOR: > 0)  -->
+                    <div class="form-row" style="padding-bottom: 5px;">
+                      <div class="col">
+                        <input type="checkbox" class="form-check-input" name="interpolation" id="interpolation" />
+                        <label class="form-check-label" for="interpolation">Interpolação</label>
+                      </div>
+                      <div class="col-sm">
+                        <input type="text" class="form-control interpolation1" placeholder="Probabilidade"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Probabilidade de acontecer esta operação na imagem" disabled>
+                      </div>
+                      <div class="col-lg-6">
+                        <input type="text" class="form-control interpolation2" placeholder="Escala"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Valores > 0 a imagem aumentara, valores < 0 a imagem diminuira" disabled>
+                      </div>
+                    </div>
+
+                    <!-- DISTORÇÕES (PROBABILIDADE, GRID_HORIZONTAL, GRID_VERTICAL, MAGINITUDE) -->
+
+                    <div class="form-row" style="padding-bottom: 5px;">
+                      <div class="col">
+                        <input type="checkbox" class="form-check-input" name="random_distortion" id="random_distortion">
+                        <label for="random_distortion">Distorções Elásticas</label>
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control random_distortion1" placeholder="Probabilidade"
+                          data-toggle="tooltip" data-placement="top"
+                          title="Probabilidade de acontecer esta operação na imagem" disabled>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control random_distortion2" placeholder="Eixo Horizontal"
+                          data-toggle="tooltip" data-placement="top" title="Quantidade de retângulos no eixo horizontal"
+                          disabled>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control random_distortion3" placeholder="Eixo Vertical"
+                          data-toggle="tooltip" data-placement="top" title="Quantidade de retângulos no eixo vertical"
+                          disabled>
+                      </div>
+                      <div class="col-sm-2">
+                        <input type="text" class="form-control random_distortion4" placeholder="Magnitude"
+                          data-toggle="tooltip" data-placement="top" title="A magnitude das distorções" disabled>
+                      </div>
+
+                    </div>
+
+                    <!-- APAGAMENTOS ALEATÓRIOS (PROBABILIDADE, RECTANGLE_AREA: %) -->
+                    <!-- EQUALIZAÇÃO DO HISTOGRAMA (PROBABILIDADE) -->
+                    <!-- INCLINAÇÃO (PROBABILIDADE, TIPO_INCLINAÇÃO: TILT, TILT_TOP_BOTTOM, TILT_LEFT_RIGHT, CORNER ) -->
+                    <!-- INVERTER (PROBABILIDADE, TOP_BOTTOM | LEFT_RIGHT | RANDOM ) -->
+                    <!-- CORTES (PROBABILIDADE, LARGURA, COMPRIMENTO, CENTRO -> BOOLEAN) -->
+
+
+                    <!-- FORM QUANTIDADE DE IMAGENS (INT QTD) -->
+                    <div class="form-row" style="padding-bottom: 5px;">
+                      <div class="col">
+                        <label class="form-check-label" for="sample">Amostragem</label>
+                      </div>
+                      <div class="col">
+                      </div>
+                      <div class="col">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Informe a quantidade" data-toggle="tooltip"
+                          data-placement="top" title="Esse número indica quantidade de imagens após as operações">
+                      </div>
+                    </div>
+
+                </form>
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <div class="col">
+                <!-- <p><input id="json_save" type="submit" value="Ok"  /></p> -->
+                <button class="btn btn-primary btn-block"><i class="fa fa-check"></i> Ok</button>
+              </div>
+              <div class="col">
+                <button data-toggle="modal" id="myBtn2" class="btn btn-success btn-block"><i class="fa fa-save"></i>
+                  Salvar</button>
+              </div>
+              <div class="col">
+                <button id="" type="" value="" class="btn btn-warning btn-block"><i class="fa fa-upload"></i>
+                  Carregar</button>
+              </div>
+              <pre id="output_configuracoes"></pre>
+            </div>
+          </div>
+
+        </div>
     </div>
-  </div>
 
+    <!-- Modal para salvar configurações -->
+    <div class="modal fade" id="myModal2" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form id="form_configuracoes_save">
+            <div class="modal-header">
+              <h4 class="modal-title text-center">Salvar configuração</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group col-md-12">
+                <div class="col-md-12 row">
+                  <input type="text" class="form-control" id="nome_arquivo" name="nome_arquivo"
+                    placeholder="Nome do arquivo" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <!-- <p><input id="json_save" type="submit" value="Salvar" class="btn btn-primary btn-block" /></p> -->
+                  <button id="json_save" type="submit" class="btn btn-success btn-block"><i class="fa fa-save"></i>
+                    Salvar</button>
+                </div>
+                <div class="col-sm-4">
+                  <p><input data-dismiss="modal" href="#" id="" value="Cancelar" class="btn btn-success btn-warning" />
+                  </p>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+    </main>
+
+  </div>
+  </div>
   <footer class="footer">
     <div class="container text-center text-muted" style="padding-top: 10px;">
       <p>Universidade Federal do Tocantins - UFT <br> Departamento de Ciência da Computação </p>
@@ -95,5 +289,11 @@
   </footer>
 </body>
 <script src="js/renderer.js"></script>
+<script>
+  // DATA TOGGLE TOOLTIP
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
 
 </html>
