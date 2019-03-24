@@ -1,7 +1,6 @@
 window.$ = window.jQuery = require('jquery')
 window.Bootstrap = require('bootstrap')
 const ipcRenderer = require('electron').ipcRenderer;
-
 let json;
 
 function grab_run_info(event) {
@@ -12,11 +11,6 @@ function grab_run_info(event) {
 
 function start_run(event) {
     event.preventDefault();
-    var form = document.getElementById( "form_configuracoes" );
-    var output = document.getElementById( "output_configuracoes" );
-    json = toJSONString( form );
-    output.innerHTML = json;
-    ipcRenderer.send('teste-disney', json);
 }
 
 function toJSONString( form ) {
@@ -43,7 +37,7 @@ function toJSONString( form ) {
 $(function(){
 	$('#register').click(function(){
 		$.ajax({
-			url: 'http://localhost:5000/signUpUser',
+			url: 'http://localhost:1234/signUpUser',
 			data: $('form').serialize(),
 			type: 'POST',
 			success: function(response){
@@ -57,28 +51,97 @@ $(function(){
 });
 
 /* CARREGAR O JSON */
+// $.getJSON('url_to_file', function(data) {
+//     for (var i in data) {
+//         if ($('input[name="'+i+'"]').type == "checkbox")
+//         {
+//             $('input[name="'+i+'"]').checked = true;
+//         }
+//         $('input[name="'+i+'"]').val(data[i]);
+//     }
+// });
 
 /* SALVAR O JSON */
 $(function(){
 	$('#json_save').click(function(){
-		$.ajax({
-			url: 'http://localhost:5000/save_config',
-			data: $('#form_configuracoes').serialize(),
+        formData = $('#form_configuracoes').serializeArray();
+        formData = JSON.stringify(formData);
+        console.log(formData)
+        $.ajax({
+			url: 'http://localhost:1234/save_config',
+			data: {form: formData, name_file: $('#nome_arquivo').val() },
 			type: 'POST',
 			success: function(response){
-                console.log(response);
+                console.log("JSON SALVO COM SUCESSO");
+                // FUTURO DIÁLOGO (MODAIS) COM SUCESSO .GIF
 			},
 			error: function(error){
-				console.log(error);
+                console.log(error);
+                // FUTURO DIÁLOGO (MODAIS) COM ERRO .GIF
 			}
 		});
 	});
 });
+
+/* Enabling functions arg */
+$(function(){
+    $('#rotation').change(function(){
+        $('.rotation1')[0].disabled = ! this.checked;
+        $('.rotation2')[0].disabled = ! this.checked; 
+        $('.rotation3')[0].disabled = ! this.checked; 
+    })
+})
+
+$(function(){
+    $('#zoom').click(function(){
+        $('.zoom1')[0].disabled = ! this.checked;
+        $('.zoom2')[0].disabled = ! this.checked; 
+        $('.zoom3')[0].disabled = ! this.checked; 
+    })
+})
+
+$(function(){
+    $('#shear').click(function(){
+        $('.shear1')[0].disabled = ! this.checked;
+        $('.shear2')[0].disabled = ! this.checked; 
+        $('.shear3')[0].disabled = ! this.checked; 
+    })
+})
+
+$(function(){
+    $('#greyscale').click(function(){
+        $('.greyscale1')[0].disabled = ! this.checked; 
+    })
+})
+
+$(function(){
+    $('#interpolation').click(function(){
+        $('.interpolation1')[0].disabled = ! this.checked; 
+        $('.interpolation2')[0].disabled = ! this.checked; 
+    })
+})
+
+$(function(){
+    $('#random_distortion').click(function(){
+        $('.random_distortion1')[0].disabled = ! this.checked; 
+        $('.random_distortion2')[0].disabled = ! this.checked; 
+        $('.random_distortion3')[0].disabled = ! this.checked; 
+        $('.random_distortion4')[0].disabled = ! this.checked; 
+    })
+})
+
+/* */
 
 
 /* MODAL CONFIG-OPEN */
 $(document).ready(function () {
     $("#myBtn").click(function () {
       $("#myModal").modal();
+    });
+});
+
+$(document).ready(function () {
+    $("#myBtn2").click(function () {
+      $("#myModal2").modal();
     });
 });
