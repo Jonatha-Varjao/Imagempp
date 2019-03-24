@@ -23,14 +23,15 @@ def signUpUser():
 def save_config():
     if request.method == 'POST':
         actual_time = datetime.now()
-        form = request.form
-        with open('image_augmentator/saved_configs/'+str(actual_time)+'.json', 'w+') as file:
-            file.write(str(form))
+        file_name = request.form['name_file']
+        form = request.form['form']
+        with open('image_augmentator/saved_configs/'+str(file_name)+'.json', 'w+') as file:
+            file.write(form)
         return json.dumps(actual_time)
         
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=5000)
+    app.run(host='localhost', port=1234, threaded=True)
 
 
 """
