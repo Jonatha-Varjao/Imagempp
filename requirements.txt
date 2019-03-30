@@ -1,0 +1,4 @@
+Augmentor==0.2.3
+Flask==0.11.1
+Flask-Cors==3.0.7
+Pillow==5.4.1
