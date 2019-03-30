@@ -1,6 +1,7 @@
 # Imagem++ < subject to changes >
 
 Imagem++ is a dekstop software powered by electron and flask web server, the object is to apply data augmentation on images databases, the data-augmentation procedures used were implemented by the [Augmentator](https://github.com/mdbloice/Augmentor)
+[![PyPI](https://img.shields.io/badge/Augmentor-v0.2.3-blue.svg?maxAge=2592000)](https://pypi.python.org/pypi/Augmentor) [![Supported Python Versions](https://img.shields.io/badge/python-%203+-blue.svg)](https://pypi.python.org/pypi/Augmentor) [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 
 ### Instalation
 Imagem++ uses [Electron](https://electronjs.org/) and [Python](https://www.python.org/), the repository has a requirements.txt, for python depencies, and a package.json for node modules dependency, the software still available only on development status.
