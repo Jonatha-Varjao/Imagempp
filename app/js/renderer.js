@@ -13,135 +13,162 @@ function start_run(event) {
     event.preventDefault();
 }
 
-function toJSONString( form ) {
+function toJSONString(form) {
     var obj = {};
-    var elements = form.querySelectorAll( "input, select, textarea, checkbox" );
-    for( var i = 0; i < elements.length; ++i ) {
+    var elements = form.querySelectorAll("input, select, textarea, checkbox");
+    for (var i = 0; i < elements.length; ++i) {
         var element = elements[i];
         if (element.type == "checkbox") {
-            var name = element.name;
-            var value = element.checked;
-        }else {
+            if (element.checked == false) {
+                var name = element.name;
+                var value = 'off';
+            }else {
+                var name = element.name;
+                var value = element.value;
+            }
+        } else {
             var name = element.name;
             var value = element.value;
         }
-        if( name ) {
-            obj[ name ] = value;
+        if (name) {
+            obj[name] = value;
         }
     }
-
-    return JSON.stringify( obj );
+    return JSON.stringify(obj);
 }
 
+
+
 /* AJAX TO BUTTON - API TEST */
-$(function(){
-	$('#register').click(function(){
-		$.ajax({
-			url: 'http://localhost:1234/signUpUser',
-			data: $('form').serialize(),
-			type: 'POST',
-			success: function(response){
-				console.log(response);
-			},
-			error: function(error){
-				console.log(error);
-			}
-		});
-	});
+
+$(function () {
+    $('#run').click(function () {
+        path = $('.dropzone')[0].dropzone.files[0].path;
+        form = document.getElementById("form_configuracoes");
+        formData = toJSONString(form) ;
+        console.log(formData.type)
+        $.ajax({
+            url: 'http://localhost:1234/run_augmentation',
+            data: {
+                rotation: $('#rotation')[0].checked,
+                rotation_probability: $('#rotation_probability').val(),
+                max_left_rotation: $('#max_left_rotation').val(),
+                max_right_rotation: $('#max_right_rotation').val(),
+
+                zoom: $('#zoom')[0].checked,
+                zoom_probability: $('#zoom_probability').val(),
+                min_factor: $('#min_factor').val(),
+                max_factor: $('#max_factor').val(),
+
+                shear: $('#shear')[0].checked,
+                shear_probability: $('#shear_probability').val(),
+                max_shear_left: $('#max_shear_left').val(),
+                max_shear_right: $('#max_shear_right').val(),
+
+                greyscale: $('#greyscale')[0].checked,
+                greyscale_probability: $('#greyscale_probability').val(),
+
+                interpolation: $('#interpolation')[0].checked,
+                scale_probability: $('#scale_probability').val(),
+                scale_factor: $('#scale_factor').val(),
+
+                distortion: $('#distortion')[0].checked,
+                distort_probability: $('#distort_probability').val(),
+                grid_width: $('#grid_width').val(),
+                grid_height: $('#grid_height').val(),
+                magnitute: $('#magnitute').val(),
+                
+                sample: $('#sample').val(),
+                name_file: path,
+            },
+            type: 'POST',
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
 });
 
-/* CARREGAR O JSON */
-// $.getJSON('url_to_file', function(data) {
-//     for (var i in data) {
-//         if ($('input[name="'+i+'"]').type == "checkbox")
-//         {
-//             $('input[name="'+i+'"]').checked = true;
-//         }
-//         $('input[name="'+i+'"]').val(data[i]);
-//     }
-// });
+document.addEventListener('drop', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    for (let f of e.dataTransfer.files) {
+        // console.log(f.path)
+        $.getJSON(f.path, function (data) {
+            $.each(data, function (key, value) {
+                // console.log(value.name, value.value)
+                if ($('input[name="' + value.name + '"]')[0].type == "checkbox") {
+                    $('input[name="' + value.name + '"]')[0].checked = true;
+                }
+                $('input[name="' + value.name + '"]').val(value.value);
+
+            });
+
+        });
+    }
+});
+
+document.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
 
 /* SALVAR O JSON */
-$(function(){
-	$('#json_save').click(function(){
+$(function () {
+    $('#json_save').click(function () {
         formData = $('#form_configuracoes').serializeArray();
         formData = JSON.stringify(formData);
         console.log(formData)
         $.ajax({
-			url: 'http://localhost:1234/save_config',
-			data: {form: formData, name_file: $('#nome_arquivo').val() },
-			type: 'POST',
-			success: function(response){
+            url: 'http://localhost:1234/save_config',
+            data: { form: formData, name_file: JSON.stringify($('#nome_arquivo').val()) },
+            type: 'POST',
+            success: function (response) {
                 console.log("JSON SALVO COM SUCESSO");
                 // FUTURO DIÁLOGO (MODAIS) COM SUCESSO .GIF
-			},
-			error: function(error){
+            },
+            error: function (error) {
                 console.log(error);
                 // FUTURO DIÁLOGO (MODAIS) COM ERRO .GIF
-			}
-		});
-	});
+            }
+        });
+    });
 });
 
-/* Enabling functions arg */
-$(function(){
-    $('#rotation').change(function(){
-        $('.rotation1')[0].disabled = ! this.checked;
-        $('.rotation2')[0].disabled = ! this.checked; 
-        $('.rotation3')[0].disabled = ! this.checked; 
+/* Enabling Run button */
+$(function () {
+    $('#okay').click(function () {
+        // testo se tem algum form marcado
+        form = document.querySelectorAll('#rotation, #zoom, #shear, #shear, #greyscale, #interpolation, #distortion')
+        console.log(form)
+        flag = true;
+        for (i in form) {
+            if (form[i].checked === true) {
+                flag = false;
+            }
+        }
+        $('#run')[0].disabled = flag;
     })
 })
 
-$(function(){
-    $('#zoom').click(function(){
-        $('.zoom1')[0].disabled = ! this.checked;
-        $('.zoom2')[0].disabled = ! this.checked; 
-        $('.zoom3')[0].disabled = ! this.checked; 
-    })
-})
-
-$(function(){
-    $('#shear').click(function(){
-        $('.shear1')[0].disabled = ! this.checked;
-        $('.shear2')[0].disabled = ! this.checked; 
-        $('.shear3')[0].disabled = ! this.checked; 
-    })
-})
-
-$(function(){
-    $('#greyscale').click(function(){
-        $('.greyscale1')[0].disabled = ! this.checked; 
-    })
-})
-
-$(function(){
-    $('#interpolation').click(function(){
-        $('.interpolation1')[0].disabled = ! this.checked; 
-        $('.interpolation2')[0].disabled = ! this.checked; 
-    })
-})
-
-$(function(){
-    $('#random_distortion').click(function(){
-        $('.random_distortion1')[0].disabled = ! this.checked; 
-        $('.random_distortion2')[0].disabled = ! this.checked; 
-        $('.random_distortion3')[0].disabled = ! this.checked; 
-        $('.random_distortion4')[0].disabled = ! this.checked; 
-    })
-})
-
-/* */
-
-
-/* MODAL CONFIG-OPEN */
+/* MODAL CONFIGURATION-FOR-RUN */
 $(document).ready(function () {
     $("#myBtn").click(function () {
-      $("#myModal").modal();
+        $("#myModal").modal();
+    });
+});
+/* MODAL CONFIGURATION-FOR-SAVE */
+$(document).ready(function () {
+    $("#myBtn2Save").click(function () {
+        $("#myModalToSave").modal();
     });
 });
 
-$(document).ready(function () {
-    $("#myBtn2").click(function () {
-      $("#myModal2").modal();
-    });
-});
+/* TOOLTIP */
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
