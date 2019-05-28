@@ -16,7 +16,10 @@
     "name": "Jonatha Oliveira Reis Varjão",
     "email": "jonathavarjao@gmail.com"
   },
-  "contributors": ["Rafael Costa Silva", "Warley Gramacho da Silva"],
+  "contributors": [
+    "Rafael Costa Silva",
+    "Warley Gramacho da Silva"
+  ],
   "license": "MIT",
   "devDependencies": {
     "electron": "^4.0.7",

@@ -36,14 +36,11 @@ function toJSONString(form) {
     }
     return JSON.stringify(obj);
 }
-
-
-
 /* AJAX TO BUTTON - API TEST */
 
 $(function () {
     $('#run').click(function () {
-        path = $('.dropzone')[0].dropzone.files[0].path;
+        // path = $('.dropzone')[0].dropzone.files[0].path;
         form = document.getElementById("form_configuracoes");
         formData = toJSONString(form) ;
         console.log(formData.type)
