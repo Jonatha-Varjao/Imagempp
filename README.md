@@ -10,6 +10,10 @@ Imagem++ uses [Electron](https://electronjs.org/) and [Python](https://www.pytho
 ```shellscript
 $user@hostname:~$<path-to-clonned-repo> pipenv install
 ```
+#### Running local server
+```shellscript
+$(virtual_env)user@hostname:~$<path-to-clonned-repo> uvicorn main:app --reload 
+```
 #### Node dependency
 ```
 $user@hostname:~$<path-to-clonned-repo> npm install

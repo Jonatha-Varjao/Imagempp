@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 
-app = FastAPI()
+app = FastAPI('Image++')
 
 """
     Rotas da API com as chamadas em AJAX (front)
