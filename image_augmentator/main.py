@@ -1,9 +1,7 @@
-from __future__ import print_function
-import time
-from datetime import datetime
-from flask import Flask, render_template, request, json
+from fastapi import FastAPI
 
-app = Flask(__name__)
+
+app = FastAPI()
 
 """
     Rotas da API com as chamadas em AJAX (front)
@@ -65,36 +63,24 @@ def parse_json(request):
     exe = ''.join(string_builder_exec)
     return exe
 
-@app.route('/run_augmentation', methods=['GET','POST'])
-def run_augmentation():
-    if request.method == 'POST':
-        exec(parse_json(request))
-        return json.dumps({'status': 'OK'})
+@app.get("/v1/api/")
+async def root():
+    return {"message": "Root End-Point"}
 
-@app.route('/signUpUser', methods=['GET','POST'])
-def signUpUser():
-    if request.method == 'POST':
-        user =  request.form['username']
-        password = request.form['password']
-        return json.dumps({'status':'OK','user':user,'pass':password})
+@app.get("/v1/api/load-config/")
+async def root():
+    return {"message": "End-Point to Read a config.json saved from user and apply into forms"}
 
-"""
-    Save json config to populate the form aplied on the run
-"""
-@app.route('/save_config', methods=['GET','POST'])
-def save_config():
-    if request.method == 'POST':
-        actual_time = datetime.now()
-        file_name = request.form['name_file']
-        form = request.form['form']
-        with open('image_augmentator/saved_configs/'+str(file_name)+'.json', 'w+') as file:
-            file.write(form)
-        return json.dumps(actual_time)
-        
+@app.post("/v1/api/save-config/")
+async def root():
+    return {"message": "End-Point to save a config.json from user and write in disk"}
+
+@app.post("/v1/api/augmentation-run/")
+async def root():
+    return {"message": "End-Point to run an augmentation routine"}
 
 if __name__ == "__main__":
     app.run(host='localhost', port=1234, threaded=True)
-
 
 """
     TODO: 
