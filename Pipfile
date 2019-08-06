@@ -9,10 +9,14 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-FastAPI = "*"
-Pillow = "*"
+fastapi = "*"
+uvicorn = "*"
+pillow = "*"
 
 [packages]
+fastapi = "*"
+uvicorn = "*"
+pillow = "*"
 
 
 [requires]
