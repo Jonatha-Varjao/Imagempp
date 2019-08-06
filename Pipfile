@@ -1,0 +1,15 @@
+[[source]]
+url = "https://github.com/Jonatha-Varjao/Imagempp"
+verify_ssl = true
+
+[dev-packages]
+Augmentor = "*"
+Flask = "*"
+Flask-Cors = "*"
+Pillow = "*"
+
+[packages]
+
+
+[requires]
+python_version = "3.7"
