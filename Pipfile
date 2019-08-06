@@ -1,15 +1,19 @@
 [[source]]
-url = "https://github.com/Jonatha-Varjao/Imagempp"
+name = "pypi"
+url = "https://pypi.org/simple"
 verify_ssl = true
 
+[[source]]
+url = "https://github.com/Jonatha-Varjao/Imagempp"
+verify_ssl = true
+name = "pypi"
+
 [dev-packages]
-Augmentor = "*"
-Flask = "*"
-Flask-Cors = "*"
+FastAPI = "*"
 Pillow = "*"
 
 [packages]
 
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"

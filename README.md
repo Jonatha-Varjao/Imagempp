@@ -4,11 +4,11 @@ Imagem++ is a dekstop software powered by electron and flask web server, the obj
 [![PyPI](https://img.shields.io/badge/Augmentor-v0.2.3-blue.svg?maxAge=2592000)](https://pypi.python.org/pypi/Augmentor) [![Supported Python Versions](https://img.shields.io/badge/python-%203+-blue.svg)](https://pypi.python.org/pypi/Augmentor) [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 
 ### Instalation
-Imagem++ uses [Electron](https://electronjs.org/) and [Python](https://www.python.org/), the repository has a requirements.txt, for python depencies, and a package.json for node modules dependency, the software still available only on development status.
+Imagem++ uses [Electron](https://electronjs.org/) and [Python](https://www.python.org/), the repository has a Pipfile, for python dev depencies, and a package.json for node modules dependency, the software still available only on development status.
 
 #### Python dependecy
 ```shellscript
-$user@hostname:~$<path-to-clonned-repo> python3 install -r requirements.txt
+$user@hostname:~$<path-to-clonned-repo> pipenv install
 ```
 #### Node dependency
 ```
