@@ -68,15 +68,15 @@ async def root():
     return {"message": "Root End-Point"}
 
 @app.get("/v1/api/load-config/")
-async def root():
+async def load_config():
     return {"message": "End-Point to Read a config.json saved from user and apply into forms"}
 
 @app.post("/v1/api/save-config/")
-async def root():
+async def save_config():
     return {"message": "End-Point to save a config.json from user and write in disk"}
 
 @app.post("/v1/api/augmentation-run/")
-async def root():
+async def augmentation_run():
     return {"message": "End-Point to run an augmentation routine"}
 
 if __name__ == "__main__":
@@ -85,4 +85,6 @@ if __name__ == "__main__":
 """
     TODO: 
         - check one open port and fire the http server
+        - make a generic router class receiving an object and concating their end-points to the BaseRouter class
+        - config sqlite connections
 """    
