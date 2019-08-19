@@ -12,12 +12,24 @@ name = "pypi"
 fastapi = "*"
 uvicorn = "*"
 pillow = "*"
+augmentor = "*"
+requests = "*"
+pydantic = "*"
+gunicorn = "*"
+alembic = "*"
+sqlalchemy = "*"
 
 [packages]
 fastapi = "*"
 uvicorn = "*"
 pillow = "*"
+augmentor = "*"
+requests = "*"
+pydantic = "*"
+gunicorn = "*"
+alembic = "*"
+sqlalchemy = "*"
 
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
