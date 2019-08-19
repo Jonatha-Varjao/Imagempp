@@ -3,7 +3,7 @@ from starlette.middleware.cors import CORSMiddleware
 from core import settings
 from api.api import api_router
 
-app = FastAPI('Image++')
+app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION, openapi_url="/api/v1/openapi.json")
 
 origins = [
     "http://localhost.tiangolo.com",
@@ -79,7 +79,7 @@ def parse_json(request):
     exe = ''.join(string_builder_exec)
     return exe
 
-app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(api_router, prefix=settings .API_V1_STR)
 
 
 """

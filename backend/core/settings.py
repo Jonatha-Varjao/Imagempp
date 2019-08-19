@@ -14,6 +14,9 @@ API_V1_STR = "/api/v1"
 SECRET_KEY = os.getenvb(b"SECRET_KEY")
 if not SECRET_KEY:
     SECRET_KEY = os.urandom(32)
+
+PROJECT_NAME = 'Imagem++'
+VERSION = '0.0.1'
 """
     SWAP PSQL to SQlite
 """
