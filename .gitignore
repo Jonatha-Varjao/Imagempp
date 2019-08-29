@@ -7,3 +7,5 @@ node_modules/
 *.json.swp
 *.lock
 package-lock.json
+build/
+dist/
